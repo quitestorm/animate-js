@@ -11,26 +11,33 @@
 // }
 
 var ol = 0;
-var isPlaying = false
+var isPlaying = false;
 var circleInterval;
 
-function circleAnimation(time){
+var el = document.getElementById("circle");
+var sc = 1;
+
+function circleAnimation(time) {
     ol++;
-    document.getElementById("dog").style.left = ol + "px"
-    if(time < 8000 ){
-        circleInterval = requestAnimationFrame(circleAnimation);
+    sc++;
+    el.style.left = ol + "px";
+    el.style.width = sc + "px";
+    el.style.height = sc + "px";
+    el.style.borderRadius = sc*100 + "px";
+    circleInterval = requestAnimationFrame(circleAnimation);
+}
 
 function mouseClicked(){
     if(isPlaying){
         isPlaying = false;
-        document.getElementById("dog").style.backgroundColor = "green"
-    cancelAnimationFrame(circleInterval);
+        document.getElementById("circle").style.backgroundColor = "dimgrey";
+        cancelAnimationFrame(circleInterval);
     }else{
         isPlaying = true;
-        document.getElementById("dog").style.backgroundColor = "orange"
-    cancelAnimationFrame(circleInterval);
+        document.getElementById("circle").style.backgroundColor = "crimson";
+        circleInterval = requestAnimationFrame(circleAnimation);
     }
 }
 
-
-document.getElementById("dog").addEventListener("click",mouseClicked)
+document.getElementById("circle").addEventListener("click", mouseClicked);
+document.getElementById("circle").style.backgroundColor = "dimgrey";
